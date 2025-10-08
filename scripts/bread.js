@@ -441,15 +441,19 @@ function mouseReleased(){
 //Calculate the standard deviation of a set of values in arr = [p1,p2,...]
 function std(arr){
   var mean = 0;
-  for (var i =0; i<arr.length;i++){
+  var i = 0;
+  for (; i < arr.length; i++){
     mean += arr[i]
   }
-  mean /= arr.length;
+  var divisor = 1 / arr.length;
+  mean *= divisor;
   var stdval = 0;
-  for (var i =0; i<arr.length;i++){
-    stdval += (arr[i]-mean)**2 / arr.length
+  var diff;
+  for (i = 0; i < arr.length; i++) {
+    diff = arr[i] - mean;
+    stdval += diff * diff * divisor;
   }
-  return stdval**0.5;
+  return Math.sqrt(stdval);
 }
 
 //Update the canvas look by overlaying the cutting board over the slicing lines. then update the message response in accordance to a 'eveness' score calculated using standard deviation of the areas of all the regions.
